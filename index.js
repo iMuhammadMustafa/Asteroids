@@ -8,9 +8,10 @@ class Player {
   constructor({ position, velocity }) {
     this.position = position;
     this.velocity = velocity;
-    this.radius = 15;
+    this.radius = 10;
     this.speedModifier = 5;
     this.rotation = 0;
+    this.rotationSpeed = 0.05;
   }
 
   draw() {
@@ -63,10 +64,10 @@ function animate() {
     player.velocity.vy -= Math.sin(player.rotation) * player.speedModifier;
   }
   if (keys.isAPressed) {
-    player.rotation -= 0.1;
+    player.rotation -= player.rotationSpeed;
   }
   if (keys.isDPressed) {
-    player.rotation += 0.1;
+    player.rotation += player.rotationSpeed;
   }
 }
 

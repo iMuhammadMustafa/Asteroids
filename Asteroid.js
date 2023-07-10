@@ -28,3 +28,50 @@ class Asteroid {
     this.position.y += this.velocity.vy;
   }
 }
+
+function GenerateRandomAsteroid() {
+  const positionIndex = Math.floor(Math.random() * 4);
+  let x, y, vx, vy;
+  let radius = 50 * Math.random() + 10;
+
+  switch (positionIndex) {
+    // Top of screen
+    case 0:
+      x = Math.random() * width;
+      y = 0 - radius;
+      vx = Math.random() * asteroidsSpeed;
+      vy = Math.random() * asteroidsSpeed;
+      break;
+    // Right of screen
+    case 1:
+      x = width + radius;
+      y = Math.random() * height;
+      vx = -Math.random() * asteroidsSpeed;
+      vy = Math.random() * asteroidsSpeed;
+      break;
+    // Bottom of screen
+    case 2:
+      x = Math.random() * width;
+      y = height + radius;
+      vx = Math.random() * asteroidsSpeed;
+      vy = -Math.random() * asteroidsSpeed;
+      break;
+    // Left of screen
+    case 3:
+      x = 0 - radius;
+      y = Math.random() * height;
+      vx = Math.random() * asteroidsSpeed;
+      vy = Math.random() * asteroidsSpeed;
+      break;
+    default:
+      break;
+  }
+
+  const newAsteroid = new Asteroid({
+    position: { x, y },
+    velocity: { vx, vy },
+    radius,
+  });
+
+  return newAsteroid;
+}

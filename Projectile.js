@@ -1,5 +1,5 @@
 const projectileRadius = 1.5;
-const projectileSpeed = 3;
+const projectileSpeed = playerSpeed * 1.5;
 const projectileFriction = 0.97;
 const projectileRotationSpeed = 0.05;
 

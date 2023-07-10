@@ -26,6 +26,21 @@ function animate() {
     }
   }
 
+  for (let i = asteroids.length - 1; i >= 0; i--) {
+    const asteroid = asteroids[i];
+    asteroid.update();
+
+    //Remove asteroids that go off screen
+    if (
+      asteroid.position.x + asteroid.radius < 0 ||
+      asteroid.position.x - asteroid.radius > width ||
+      asteroid.position.y + asteroid.radius < 0 ||
+      asteroid.position.y - asteroid.radius > height
+    ) {
+      asteroids.splice(i, 1);
+    }
+  }
+
   if (keys.isWPressed) {
     player.velocity.vx = Math.cos(player.rotation) * player.speedModifier;
     player.velocity.vy = Math.sin(player.rotation) * player.speedModifier;
@@ -33,10 +48,10 @@ function animate() {
     player.velocity.vx *= player.friction;
     player.velocity.vy *= player.friction;
   }
-  if (keys.isSPressed) {
-    player.velocity.vx = -Math.cos(player.rotation) * player.speedModifier;
-    player.velocity.vy = -Math.sin(player.rotation) * player.speedModifier;
-  }
+  //   if (keys.isSPressed) {
+  //     player.velocity.vx = -Math.cos(player.rotation) * player.speedModifier;
+  //     player.velocity.vy = -Math.sin(player.rotation) * player.speedModifier;
+  //   }
   if (keys.isAPressed) {
     player.rotation -= player.rotationSpeed;
   }
@@ -108,5 +123,44 @@ const player = new Player({ position: { x: width / 2, y: height / 2 }, velocity:
 player.draw();
 
 const projectiles = [];
+const asteroids = [];
+
+setInterval(() => {
+  const positionIndex = Math.floor(Math.random() * 4);
+  let x, y;
+  let radius = asteroidsRadius;
+
+  switch (positionIndex) {
+    // Top of screen
+    case 0:
+      x = Math.random() * width;
+      y = 0 - radius;
+      break;
+    // Right of screen
+    case 1:
+      x = width + radius;
+      y = Math.random() * height;
+      break;
+    // Bottom of screen
+    case 2:
+      x = Math.random() * width;
+      y = height + radius;
+      break;
+    // Left of screen
+    case 3:
+      x = 0 - radius;
+      y = Math.random() * height;
+      break;
+    default:
+      break;
+  }
+
+  const newAsteroid = new Asteroid({
+    position: { x, y },
+    velocity: { vx: Math.random() * asteroidsSpeed, vy: Math.random() * asteroidsSpeed },
+    radius,
+  });
+  asteroids.push(newAsteroid);
+}, 500);
 
 animate();

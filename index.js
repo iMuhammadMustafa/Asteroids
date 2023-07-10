@@ -14,6 +14,16 @@ function animate() {
   for (let i = projectiles.length - 1; i >= 0; i--) {
     const projectile = projectiles[i];
     projectile.update();
+
+    //Remove projectiles that go off screen
+    if (
+      projectile.position.x + projectile.radius < 0 ||
+      projectile.position.x - projectile.radius > width ||
+      projectile.position.y + projectile.radius < 0 ||
+      projectile.position.y - projectile.radius > height
+    ) {
+      projectiles.splice(i, 1);
+    }
   }
 
   if (keys.isWPressed) {
@@ -60,7 +70,10 @@ window.addEventListener("keydown", e => {
           x: player.position.x + Math.cos(player.rotation) * player.headDistance * player.radius,
           y: player.position.y + Math.sin(player.rotation) * player.headDistance * player.radius,
         },
-        velocity: { vx: player.velocity.vx, vy: player.velocity.vy },
+        velocity: {
+          vx: Math.cos(player.rotation) * projectileSpeed,
+          vy: Math.sin(player.rotation) * projectileSpeed,
+        },
       });
       projectiles.push(newProjectile);
       break;

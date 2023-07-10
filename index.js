@@ -36,3 +36,49 @@ class Player {
 
 const player = new Player({ position: { x: width / 2, y: height / 2 }, velocity: { vx: 0, vy: 0 } });
 player.draw();
+
+const keys = { isWPressed: false, isAPressed: false, isSPressed: false, isDPressed: false };
+window.addEventListener("keydown", e => {
+  switch (e.code) {
+    case "KeyW":
+    case "ArrowUp":
+      keys.isWPressed = true;
+      break;
+    case "KeyA":
+    case "ArrowLeft":
+      keys.isAPressed = true;
+      break;
+    case "KeyS":
+    case "ArrowDown":
+      keys.isSPressed = true;
+      break;
+    case "KeyD":
+    case "ArrowRight":
+      keys.isDPressed = true;
+      break;
+    default:
+      break;
+  }
+});
+window.addEventListener("keyup", e => {
+  switch (e.code) {
+    case "KeyW":
+    case "ArrowUp":
+      keys.isWPressed = false;
+      break;
+    case "KeyA":
+    case "ArrowLeft":
+      keys.isAPressed = false;
+      break;
+    case "KeyS":
+    case "ArrowDown":
+      keys.isSPressed = false;
+      break;
+    case "KeyD":
+    case "ArrowRight":
+      keys.isDPressed = false;
+      break;
+    default:
+      break;
+  }
+});

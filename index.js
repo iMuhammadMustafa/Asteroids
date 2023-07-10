@@ -18,7 +18,13 @@ function DrawBackground() {
   }
 }
 
+let isPaused = false;
+
 function animate() {
+  if (isPaused) {
+    return;
+  }
+
   window.requestAnimationFrame(animate);
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -113,6 +119,13 @@ function animate() {
 const keys = { isWPressed: false, isAPressed: false, isSPressed: false, isDPressed: false };
 window.addEventListener("keydown", e => {
   switch (e.code) {
+    case "KeyP":
+      if (isPaused) {
+        isPaused = false;
+        animate();
+      } else {
+        isPaused = true;
+      }
     case "KeyW":
     case "ArrowUp":
       keys.isWPressed = true;

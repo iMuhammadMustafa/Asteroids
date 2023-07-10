@@ -14,6 +14,7 @@ class Player {
     this.rotation = 0;
     this.rotationSpeed = playerRotationSpeed;
     this.headDistance = playerHeadDistance;
+    this.score = 0;
 
     // this.head = { x: this.position.x + this.radius * 3, y: this.position.y };
     // this.baseStart = { x: this.position.x - this.radius, y: this.position.y - this.radius };

@@ -4,10 +4,25 @@ const ctx = canvas.getContext("2d");
 const width = (canvas.width = window.innerWidth);
 const height = (canvas.height = window.innerHeight);
 
+function DrawBackground() {
+  for (let i = 0; i < 50; i++) {
+    let x = Math.random() * width;
+    let y = Math.random() * height;
+    let radius = 1;
+
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
+    ctx.fillStyle = "white";
+    ctx.fill();
+    ctx.closePath();
+  }
+}
+
 function animate() {
   window.requestAnimationFrame(animate);
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  DrawBackground();
 
   player.update();
 

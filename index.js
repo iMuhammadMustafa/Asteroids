@@ -4,9 +4,6 @@ const ctx = canvas.getContext("2d");
 const width = (canvas.width = window.innerWidth);
 const height = (canvas.height = window.innerHeight);
 
-ctx.fillStyle = "black";
-ctx.fillRect(0, 0, canvas.width, canvas.height);
-
 class Player {
   constructor({ position, velocity }) {
     this.position = position;
@@ -32,10 +29,28 @@ class Player {
     ctx.strokeStyle = "white";
     ctx.stroke();
   }
+  update() {
+    this.draw();
+    this.position.x += this.velocity.vx;
+    this.position.y += this.velocity.vy;
+  }
 }
 
-const player = new Player({ position: { x: width / 2, y: height / 2 }, velocity: { vx: 0, vy: 0 } });
-player.draw();
+function animate() {
+  window.requestAnimationFrame(animate);
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  player.update();
+  //   player.velocity = { vx: 0, vy: 0 };
+
+  if (keys.isWPressed) {
+    player.velocity.vx += 1;
+  }
+  if (keys.isSPressed) {
+    player.velocity.vx -= 1;
+  }
+}
 
 const keys = { isWPressed: false, isAPressed: false, isSPressed: false, isDPressed: false };
 window.addEventListener("keydown", e => {
@@ -82,3 +97,7 @@ window.addEventListener("keyup", e => {
       break;
   }
 });
+
+const player = new Player({ position: { x: width / 2, y: height / 2 }, velocity: { vx: 0, vy: 0 } });
+player.draw();
+animate();

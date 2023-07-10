@@ -11,7 +11,7 @@ class Player {
   constructor({ position, velocity }) {
     this.position = position;
     this.velocity = velocity;
-    this.radius = 10;
+    this.radius = 15;
     this.rotation = 0;
   }
 
@@ -22,6 +22,15 @@ class Player {
     ctx.strokeStyle = "white";
     ctx.stroke();
     ctx.closePath();
+
+    //Draw Player
+    ctx.beginPath();
+    ctx.moveTo(this.position.x + this.radius * 3, this.position.y);
+    ctx.lineTo(this.position.x - this.radius, this.position.y - this.radius);
+    ctx.lineTo(this.position.x - this.radius, this.position.y + this.radius);
+    ctx.closePath();
+    ctx.strokeStyle = "white";
+    ctx.stroke();
   }
 }
 

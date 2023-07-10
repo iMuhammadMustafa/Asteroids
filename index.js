@@ -9,10 +9,17 @@ class Player {
     this.position = position;
     this.velocity = velocity;
     this.radius = 15;
+    this.speedModifier = 5;
     this.rotation = 0;
   }
 
   draw() {
+    //Rotate
+    ctx.save();
+    ctx.translate(this.position.x, this.position.y);
+    ctx.rotate(this.rotation);
+    ctx.translate(-this.position.x, -this.position.y);
+
     //Draw Center
     ctx.beginPath();
     ctx.arc(this.position.x, this.position.y, 3, 0, 2 * Math.PI, false);
@@ -28,7 +35,10 @@ class Player {
     ctx.closePath();
     ctx.strokeStyle = "white";
     ctx.stroke();
+
+    ctx.restore();
   }
+
   update() {
     this.draw();
     this.position.x += this.velocity.vx;
@@ -42,13 +52,21 @@ function animate() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   player.update();
-  //   player.velocity = { vx: 0, vy: 0 };
+  player.velocity = { vx: 0, vy: 0 };
 
   if (keys.isWPressed) {
-    player.velocity.vx += 1;
+    player.velocity.vx += Math.cos(player.rotation) * player.speedModifier;
+    player.velocity.vy += Math.sin(player.rotation) * player.speedModifier;
   }
   if (keys.isSPressed) {
-    player.velocity.vx -= 1;
+    player.velocity.vx -= Math.cos(player.rotation) * player.speedModifier;
+    player.velocity.vy -= Math.sin(player.rotation) * player.speedModifier;
+  }
+  if (keys.isAPressed) {
+    player.rotation -= 0.1;
+  }
+  if (keys.isDPressed) {
+    player.rotation += 0.1;
   }
 }
 

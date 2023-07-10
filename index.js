@@ -62,16 +62,33 @@ function animate() {
     for (let j = projectiles.length - 1; j >= 0; j--) {
       let projectile = projectiles[j];
 
-      let distance = Math.sqrt((asteroid.position.x - projectile.position.x) ** 2 + (asteroid.position.y - projectile.position.y) ** 2);
+      let xDifference = asteroid.position.x - projectile.position.x;
+      let yDifference = asteroid.position.y - projectile.position.y;
+      let distance = Math.sqrt(xDifference ** 2 + yDifference ** 2);
       if (distance < asteroid.radius + projectile.radius) {
-        //Remove asteroid
         asteroids.splice(i, 1);
-        //Remove projectile
         projectiles.splice(j, 1);
-        let newAsteroid = GenerateRandomAsteroid();
-        asteroids.push(newAsteroid);
+
+        let newAstroid;
+        if (asteroid.radius > 30) {
+          newAstroid = new Asteroid({
+            position: asteroid.position,
+            velocity: asteroid.velocity,
+            radius: asteroid.radius / 2,
+          });
+          player.score += 50;
+        } else {
+          newAstroid = GenerateRandomAsteroid();
+          player.score += 200;
+        }
+        asteroids.push(newAstroid);
       }
     }
+  }
+
+  //Check for collisions between asteroids and player
+  for (let i = asteroids.length - 1; i >= 0; i--) {
+    let asteroid = asteroids[i];
   }
 
   if (keys.isWPressed) {

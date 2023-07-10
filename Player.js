@@ -1,12 +1,17 @@
+const playerRadius = 8;
+const playerSpeed = 5;
+const playerFriction = 0.97;
+const playerRotationSpeed = 0.05;
+
 class Player {
   constructor({ position, velocity }) {
     this.position = position;
     this.velocity = velocity;
-    this.radius = 8;
-    this.speedModifier = 5;
-    this.friction = 0.97;
+    this.radius = playerRadius;
+    this.speedModifier = playerSpeed;
+    this.friction = playerFriction;
     this.rotation = 0;
-    this.rotationSpeed = 0.05;
+    this.rotationSpeed = playerRotationSpeed;
   }
 
   draw() {

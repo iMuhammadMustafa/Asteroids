@@ -1,4 +1,5 @@
 const playerRadius = 8;
+const playerHeadDistance = 3;
 const playerSpeed = 5;
 const playerFriction = 0.97;
 const playerRotationSpeed = 0.05;
@@ -12,6 +13,11 @@ class Player {
     this.friction = playerFriction;
     this.rotation = 0;
     this.rotationSpeed = playerRotationSpeed;
+    this.headDistance = playerHeadDistance;
+
+    // this.head = { x: this.position.x + this.radius * 3, y: this.position.y };
+    // this.baseStart = { x: this.position.x - this.radius, y: this.position.y - this.radius };
+    // this.baseEnd = { x: this.position.x - this.radius, y: this.position.y + this.radius };
   }
 
   draw() {
@@ -30,7 +36,7 @@ class Player {
 
     //Draw Player
     ctx.beginPath();
-    ctx.moveTo(this.position.x + this.radius * 3, this.position.y);
+    ctx.moveTo(this.position.x + this.radius * this.headDistance, this.position.y);
     ctx.lineTo(this.position.x - this.radius, this.position.y - this.radius);
     ctx.lineTo(this.position.x - this.radius, this.position.y + this.radius);
     ctx.closePath();

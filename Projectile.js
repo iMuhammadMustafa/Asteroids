@@ -15,7 +15,6 @@ class Projectile {
   }
 
   draw() {
-    console.log("test");
     ctx.beginPath();
     ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI, false);
     ctx.fillStyle = "white";

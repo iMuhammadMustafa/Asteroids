@@ -55,7 +55,13 @@ window.addEventListener("keydown", e => {
       keys.isDPressed = true;
       break;
     case "Space":
-      let newProjectile = new Projectile({ position: { x: player.position.x, y: player.position.y }, velocity: { vx: 1, vy: 0 } });
+      let newProjectile = new Projectile({
+        position: {
+          x: player.position.x + Math.cos(player.rotation) * player.headDistance * player.radius,
+          y: player.position.y + Math.sin(player.rotation) * player.headDistance * player.radius,
+        },
+        velocity: { vx: player.velocity.vx, vy: player.velocity.vy },
+      });
       projectiles.push(newProjectile);
       break;
     default:

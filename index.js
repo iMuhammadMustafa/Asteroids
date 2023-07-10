@@ -10,7 +10,11 @@ function animate() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   player.update();
-  projectile.update();
+
+  for (let i = projectiles.length - 1; i >= 0; i--) {
+    const projectile = projectiles[i];
+    projectile.update();
+  }
 
   if (keys.isWPressed) {
     player.velocity.vx = Math.cos(player.rotation) * player.speedModifier;
@@ -53,6 +57,7 @@ window.addEventListener("keydown", e => {
     case "Space":
       let newProjectile = new Projectile({ position: { x: player.position.x, y: player.position.y }, velocity: { vx: 1, vy: 0 } });
       projectiles.push(newProjectile);
+      break;
     default:
       break;
   }
@@ -82,9 +87,6 @@ window.addEventListener("keyup", e => {
 
 const player = new Player({ position: { x: width / 2, y: height / 2 }, velocity: { vx: 0, vy: 0 } });
 player.draw();
-
-const projectile = new Projectile({ position: { x: 500, y: 500 }, velocity: { vx: 0, vy: 0 } });
-projectile.draw();
 
 const projectiles = [];
 

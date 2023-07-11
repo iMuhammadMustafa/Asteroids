@@ -28,3 +28,15 @@ class Projectile {
     this.position.y += this.velocity.vy;
   }
 }
+
+function AnimateProjectiles() {
+  for (let i = projectiles.length - 1; i >= 0; i--) {
+    const projectile = projectiles[i];
+    projectile.update();
+
+    //Remove projectiles that go off screen
+    if (IsOffScreen(projectile)) {
+      projectiles.splice(i, 1);
+    }
+  }
+}

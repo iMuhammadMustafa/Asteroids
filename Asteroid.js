@@ -29,6 +29,18 @@ class Asteroid {
   }
 }
 
+function AnimateAsteroids() {
+  for (let i = asteroids.length - 1; i >= 0; i--) {
+    const asteroid = asteroids[i];
+    asteroid.update();
+
+    //Remove asteroids that go off screen
+    if (IsOffScreen(asteroid)) {
+      asteroids.splice(i, 1);
+    }
+  }
+}
+
 function GenerateRandomAsteroid() {
   const positionIndex = Math.floor(Math.random() * 4);
   let x, y, vx, vy;

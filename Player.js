@@ -1,8 +1,8 @@
 const playerRadius = 8;
 const playerHeadDistance = 3;
-const playerSpeed = 5;
+const playerSpeed = 8;
 const playerFriction = 0.97;
-const playerRotationSpeed = 0.05;
+const playerRotationSpeed = 0.1;
 
 class Player {
   constructor({ position, velocity }) {

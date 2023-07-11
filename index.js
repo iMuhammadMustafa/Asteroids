@@ -4,14 +4,23 @@ const ctx = canvas.getContext("2d");
 const width = (canvas.width = window.innerWidth);
 const height = (canvas.height = window.innerHeight);
 
-function DrawBackground() {
-  for (let i = 0; i < 50; i++) {
+const backgroundStars = [];
+GenerateBackground();
+function GenerateBackground() {
+  for (let i = 0; i < 500; i++) {
     let x = Math.random() * width;
     let y = Math.random() * height;
-    let radius = 1;
+    let radius = 0.5;
+
+    backgroundStars.push({ x, y, radius });
+  }
+}
+function DrawBackground() {
+  for (let i = 0; i < backgroundStars.length; i++) {
+    let star = backgroundStars[i];
 
     ctx.beginPath();
-    ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
+    ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI, false);
     ctx.fillStyle = "white";
     ctx.fill();
     ctx.closePath();
@@ -29,7 +38,6 @@ function animate() {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   DrawBackground();
-
   player.update();
 
   for (let i = projectiles.length - 1; i >= 0; i--) {

@@ -29,11 +29,11 @@ class Player {
     ctx.translate(-this.position.x, -this.position.y);
 
     //Draw Center
-    ctx.beginPath();
-    ctx.arc(this.position.x, this.position.y, 3, 0, 2 * Math.PI, false);
-    ctx.strokeStyle = "white";
-    ctx.stroke();
-    ctx.closePath();
+    // ctx.beginPath();
+    // ctx.arc(this.position.x, this.position.y, 3, 0, 2 * Math.PI, false);
+    // ctx.strokeStyle = "white";
+    // ctx.stroke();
+    // ctx.closePath();
 
     //Draw Player
     ctx.beginPath();

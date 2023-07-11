@@ -51,5 +51,9 @@ class Player {
     this.draw();
     this.position.x += this.velocity.vx;
     this.position.y += this.velocity.vy;
+
+    this.head = { x: this.position.x + this.radius * this.headDistance, y: this.position.y };
+    this.baseStart = { x: this.position.x - this.radius, y: this.position.y - this.radius };
+    this.baseEnd = { x: this.position.x - this.radius, y: this.position.y + this.radius };
   }
 }

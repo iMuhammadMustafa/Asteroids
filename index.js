@@ -28,7 +28,6 @@ function DrawBackground() {
 }
 
 let isPaused = false;
-
 function animate() {
   if (isPaused) {
     return;
@@ -103,6 +102,14 @@ function animate() {
   //Check for collisions between asteroids and player
   for (let i = asteroids.length - 1; i >= 0; i--) {
     let asteroid = asteroids[i];
+
+    let xDifference = asteroid.position.x - player.position.x;
+    let yDifference = asteroid.position.y - player.position.y;
+    let distance = Math.sqrt(xDifference ** 2 + yDifference ** 2);
+    if (distance < asteroid.radius + player.radius) {
+      isPaused = true;
+      alert("Game Over");
+    }
   }
 
   if (keys.isWPressed) {

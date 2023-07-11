@@ -59,12 +59,11 @@ function animate() {
   window.requestAnimationFrame(animate);
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  if (isMovingBackground) {
-    backgroundStars.splice(0, backgroundStars.length);
-    GenerateBackground();
-  }
+  // if (isMovingBackground) {
+  //   backgroundStars.splice(0, backgroundStars.length);
+  //   GenerateBackground();
+  // }
   DrawBackground();
-  player.update();
 
   AnimateProjectiles();
 
@@ -107,6 +106,7 @@ function animate() {
   if (keys.isDPressed) {
     player.rotation += player.rotationSpeed;
   }
+  player.update();
 }
 
 const player = new Player({ position: { x: width / 2, y: height / 2 }, velocity: { vx: 0, vy: 0 } });

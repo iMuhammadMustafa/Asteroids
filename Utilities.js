@@ -57,8 +57,9 @@ function ProjectileAsteroidsCollision() {
           player.score += 200;
         }
         asteroids.push(newAstroid);
-        const score = document.querySelector("#score");
-        score.textContent = player.score;
+        document.querySelectorAll("#score").forEach(scoreboard => {
+          scoreboard.textContent = player.score;
+        });
       }
     }
   }

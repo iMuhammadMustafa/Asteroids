@@ -43,7 +43,10 @@ restartButton.addEventListener("click", () => {
   projectiles.splice(0, projectiles.length);
 
   restartButton.classList.add("hidden");
-  document.querySelector("#score").textContent = player.score;
+  document.querySelector("#game-over").classList.add("hidden");
+  document.querySelectorAll("#score").forEach(scoreboard => {
+    scoreboard.textContent = player.score;
+  });
 
   animate();
 });
@@ -78,6 +81,7 @@ function animate() {
     if (distance < asteroid.radius + player.radius) {
       isPaused = true;
       // alert("Game Over");
+      document.querySelector("#game-over").classList.remove("hidden");
       const restartButton = document.querySelector("#restart");
       restartButton.classList.remove("hidden");
     }

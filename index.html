@@ -11,7 +11,8 @@
   </head>
   <body>
     <style>
-      body {
+      body,
+      h2 {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -21,8 +22,49 @@
         max-height: 100%;
         display: block;
       }
+
+      .top-bar {
+        display: flex;
+        position: absolute;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        top: 10px;
+        color: rgb(174, 174, 174);
+      }
+      .buttons * {
+        background-color: transparent;
+        border: 1px solid rgb(174, 174, 174);
+        border-radius: 10px;
+        color: rgb(174, 174, 174);
+        padding: 10px;
+        margin: 2px;
+        cursor: pointer;
+      }
+      .buttons :hover {
+        background-color: rgb(174, 174, 174);
+        color: black;
+      }
+      .hidden {
+        display: none;
+      }
+      .score {
+        margin-left: 10px;
+      }
     </style>
+    <div class="top-bar">
+      <div class="score">
+        <h2>Score: <span id="score">0</span></h2>
+      </div>
+      <div class="buttons">
+        <button id="restart" class="hidden">Restart</button>
+        <button id="pause">Pause</button>
+        <button id="isMovingBackground">Background</button>
+      </div>
+    </div>
     <canvas id="canvas"></canvas>
+
     <script src="Player.js"></script>
     <script src="Projectile.js"></script>
     <script src="Asteroid.js"></script>

@@ -1,8 +1,8 @@
-function GenerateBackground() {
-  for (let i = 0; i < 500; i++) {
+function GenerateBackground(starsAmount = 100, starsRadius = 0.9) {
+  for (let i = 0; i < starsAmount; i++) {
     let x = Math.random() * width;
     let y = Math.random() * height;
-    let radius = 0.5;
+    let radius = starsRadius;
 
     backgroundStars.push({ x, y, radius });
   }
@@ -57,6 +57,8 @@ function ProjectileAsteroidsCollision() {
           player.score += 200;
         }
         asteroids.push(newAstroid);
+        const score = document.querySelector("#score");
+        score.textContent = player.score;
       }
     }
   }

@@ -81,13 +81,32 @@ function animate() {
     if (distance < asteroid.radius + player.radius) {
       isPaused = true;
       // alert("Game Over");
+      clearInterval(intervalId);
       document.querySelector("#game-over").classList.remove("hidden");
       const restartButton = document.querySelector("#restart");
       restartButton.classList.remove("hidden");
     }
   }
 
-  HandleKeyPress();
+  // HandleKeyPress();
+
+  if (keys.isWPressed) {
+    player.velocity.vx = Math.cos(player.rotation) * player.speedModifier;
+    player.velocity.vy = Math.sin(player.rotation) * player.speedModifier;
+  } else if (!keys.isWPressed) {
+    player.velocity.vx *= player.friction;
+    player.velocity.vy *= player.friction;
+  }
+  //   if (keys.isSPressed) {
+  //     player.velocity.vx = -Math.cos(player.rotation) * player.speedModifier;
+  //     player.velocity.vy = -Math.sin(player.rotation) * player.speedModifier;
+  //   }
+  if (keys.isAPressed) {
+    player.rotation -= player.rotationSpeed;
+  }
+  if (keys.isDPressed) {
+    player.rotation += player.rotationSpeed;
+  }
 }
 
 const player = new Player({ position: { x: width / 2, y: height / 2 }, velocity: { vx: 0, vy: 0 } });

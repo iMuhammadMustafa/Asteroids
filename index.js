@@ -41,6 +41,10 @@ restartButton.addEventListener("click", () => {
   player.velocity = { vx: 0, vy: 0 };
   asteroids.splice(0, asteroids.length);
   projectiles.splice(0, projectiles.length);
+
+  restartButton.classList.add("hidden");
+  document.querySelector("#score").textContent = player.score;
+
   animate();
 });
 
@@ -74,6 +78,8 @@ function animate() {
     if (distance < asteroid.radius + player.radius) {
       isPaused = true;
       // alert("Game Over");
+      const restartButton = document.querySelector("#restart");
+      restartButton.classList.remove("hidden");
     }
   }
 

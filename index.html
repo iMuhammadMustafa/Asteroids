@@ -1,95 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./index.css" />
-    <script src="./index.js" type="module" defer></script>
-    <title>Muhammad Mustafa | Software Developer</title>
-    <link rel="icon" href="./Assets/fav.png" />
-  </head>
-  <body>
-    <style>
-      body,
-      h2 {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      canvas {
-        max-width: 100%;
-        max-height: 100%;
-        display: block;
-      }
 
-      .top-bar {
-        display: flex;
-        position: absolute;
-        width: 100%;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 100;
-        top: 10px;
-        color: rgb(174, 174, 174);
-      }
-      .button {
-        background-color: transparent;
-        border: 1px solid rgb(174, 174, 174);
-        border-radius: 10px;
-        color: rgb(174, 174, 174);
-        padding: 10px;
-        margin: 2px;
-        cursor: pointer;
-      }
-      .buttons :hover {
-        background-color: rgb(174, 174, 174);
-        color: black;
-      }
-      .hidden {
-        display: none !important;
-      }
-      .score {
-        margin-left: 10px;
-      }
-      .game-over {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 100;
-        color: rgb(174, 174, 174);
-      }
-    </style>
-    <div class="top-bar">
-      <div class="score">
-        <h2>Score: <span id="score">0</span></h2>
-      </div>
-      <div class="buttons">
-        <!-- <button id="restart" class="button hidden">Restart</button> -->
-        <button id="pause" class="button">Pause</button>
-        <button id="isMovingBackground" class="button">Background</button>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./index.css" />
+  <script src="./index.js" type="module" defer></script>
+  <title>Muhammad Mustafa | Software Developer</title>
+  <link rel="icon" href="./Assets/fav.png" />
+</head>
+
+<body>
+  <style>
+    body,
+    h2 {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    canvas {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+    }
+
+    .top-bar {
+      display: flex;
+      position: absolute;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      top: 10px;
+      color: rgb(174, 174, 174);
+    }
+
+    .button {
+      background-color: transparent;
+      border: 1px solid rgb(174, 174, 174);
+      border-radius: 10px;
+      color: rgb(174, 174, 174);
+      padding: 10px;
+      margin: 2px;
+      cursor: pointer;
+    }
+
+    .buttons :hover {
+      background-color: rgb(174, 174, 174);
+      color: black;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .score {
+      margin-left: 10px;
+    }
+
+    .game-over {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      color: rgb(174, 174, 174);
+    }
+  </style>
+  <div class="top-bar">
+    <div class="score">
+      <h2>Score: <span id="score">0</span></h2>
     </div>
-    <canvas id="canvas"></canvas>
-
-    <div id="game-over" class="game-over hidden">
-      <h1>Game Over</h1>
-      <h2 style="margin-bottom: 10px">Score: <span id="score">0</span></h2>
-      <button id="restart" class="button">Restart</button>
+    <div class="buttons">
+      <!-- <button id="restart" class="button hidden">Restart</button> -->
+      <button id="pause" class="button">Pause</button>
+      <button id="isMovingBackground" class="button">Animate Background</button>
     </div>
+  </div>
+  <canvas id="canvas"></canvas>
 
-    <script src="Utilities.js"></script>
-    <script src="Player.js"></script>
-    <script src="Projectile.js"></script>
-    <script src="Asteroid.js"></script>
-    <script src="index.js"></script>
-  </body>
+  <div id="game-over" class="game-over hidden">
+    <h1>Game Over</h1>
+    <h2 style="margin-bottom: 10px">Score: <span id="score">0</span></h2>
+    <button id="restart" class="button">Restart</button>
+  </div>
+
+  <script src="Utilities.js"></script>
+  <script src="Player.js"></script>
+  <script src="Projectile.js"></script>
+  <script src="Asteroid.js"></script>
+  <script src="index.js"></script>
+</body>
+
 </html>

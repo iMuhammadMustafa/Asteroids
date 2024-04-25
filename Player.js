@@ -3,6 +3,7 @@ const playerHeadDistance = 3;
 const playerSpeed = 8;
 const playerFriction = 0.97;
 const playerRotationSpeed = 0.1;
+let fireRate = 100;
 
 class Player {
   constructor({ position, velocity }) {
@@ -15,10 +16,6 @@ class Player {
     this.rotationSpeed = playerRotationSpeed;
     this.headDistance = playerHeadDistance;
     this.score = 0;
-
-    // this.head = { x: this.position.x + this.radius * 3, y: this.position.y };
-    // this.baseStart = { x: this.position.x - this.radius, y: this.position.y - this.radius };
-    // this.baseEnd = { x: this.position.x - this.radius, y: this.position.y + this.radius };
   }
 
   draw() {
@@ -27,14 +24,6 @@ class Player {
     ctx.translate(this.position.x, this.position.y);
     ctx.rotate(this.rotation);
     ctx.translate(-this.position.x, -this.position.y);
-
-    //Draw Center
-    // ctx.beginPath();
-    // ctx.arc(this.position.x, this.position.y, 3, 0, 2 * Math.PI, false);
-    // ctx.strokeStyle = "white";
-    // ctx.stroke();
-    // ctx.closePath();
-
     //Draw Player
     ctx.beginPath();
     ctx.moveTo(this.position.x + this.radius * this.headDistance, this.position.y);

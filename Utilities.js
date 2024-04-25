@@ -1,4 +1,4 @@
-function GenerateBackground(starsAmount = 100, starsRadius = 0.9) {
+function GenerateBackgroundStars(starsAmount = 100, starsRadius = 0.9) {
   for (let i = 0; i < starsAmount; i++) {
     let x = Math.random() * width;
     let y = Math.random() * height;
@@ -65,88 +65,87 @@ function ProjectileAsteroidsCollision() {
   }
 }
 
-const keys = { isWPressed: false, isAPressed: false, isSPressed: false, isDPressed: false };
+function FireProjectile() {
+  let newProjectile = new Projectile({
+    position: {
+      x: player.position.x + Math.cos(player.rotation) * player.headDistance * player.radius,
+      y: player.position.y + Math.sin(player.rotation) * player.headDistance * player.radius,
+    },
+    velocity: {
+      vx: Math.cos(player.rotation) * projectileSpeed,
+      vy: Math.sin(player.rotation) * projectileSpeed,
+    },
+  });
+  projectiles.push(newProjectile);
+
+}
+
+const keys = { isWPressed: false, isAPressed: false, isSPressed: false, isDPressed: false, isSpacePressed: false };
+let fireInterval = null;
 window.addEventListener("keydown", e => {
-  switch (e.code) {
-    case "KeyP":
-      if (isPaused) {
-        isPaused = false;
-        animate();
-      } else {
-        isPaused = true;
-      }
-      break;
-    case "KeyW":
-    case "ArrowUp":
-      keys.isWPressed = true;
-      break;
-    case "KeyA":
-    case "ArrowLeft":
-      keys.isAPressed = true;
-      break;
-    case "KeyS":
-    case "ArrowDown":
-      keys.isSPressed = true;
-      break;
-    case "KeyD":
-    case "ArrowRight":
-      keys.isDPressed = true;
-      break;
-    case "Space":
-      let newProjectile = new Projectile({
-        position: {
-          x: player.position.x + Math.cos(player.rotation) * player.headDistance * player.radius,
-          y: player.position.y + Math.sin(player.rotation) * player.headDistance * player.radius,
-        },
-        velocity: {
-          vx: Math.cos(player.rotation) * projectileSpeed,
-          vy: Math.sin(player.rotation) * projectileSpeed,
-        },
-      });
-      projectiles.push(newProjectile);
-      break;
-    default:
-      break;
+  let key = e.code;
+
+  if (key === "KeyP") {
+    if (isPaused) {
+      isPaused = false;
+      animate();
+    } else {
+      isPaused = true;
+    }
+  }
+  if (key === "KeyW" || key === "ArrowUp") {
+    keys.isWPressed = true;
+  }
+  if (key === "KeyA" || key === "ArrowLeft") {
+    keys.isAPressed = true;
+  }
+  if (key === "KeyD" || key === "ArrowRight") {
+    keys.isDPressed = true;
+  }
+  if (key === "KeyS" || key === "ArrowDown") {
+    keys.isSPressed = true;
+  }
+  if (key === "Space") {
+    keys.isSpacePressed = true;
+    if (!fireInterval) {
+      fireInterval = setInterval(FireProjectile, fireRate); // Adjust the interval as needed
+    }
   }
 });
 window.addEventListener("keyup", e => {
-  switch (e.code) {
-    case "KeyW":
-    case "ArrowUp":
-      keys.isWPressed = false;
-      break;
-    case "KeyA":
-    case "ArrowLeft":
-      keys.isAPressed = false;
-      break;
-    case "KeyS":
-    case "ArrowDown":
-      keys.isSPressed = false;
-      break;
-    case "KeyD":
-    case "ArrowRight":
-      keys.isDPressed = false;
-      break;
-    default:
-      break;
+
+  let key = e.code;
+
+  if (key === "KeyW" || key === "ArrowUp") {
+    keys.isWPressed = false;
+  }
+  if (key === "KeyA" || key === "ArrowLeft") {
+    keys.isAPressed = false;
+  }
+  if (key === "KeyD" || key === "ArrowRight") {
+    keys.isDPressed = false;
+  }
+  if (key === "KeyS" || key === "ArrowDown") {
+    keys.isSPressed = false;
+  }
+  if (key === "Space") {
+    keys.isSpacePressed = false;
+    clearInterval(fireInterval);
+    fireInterval = null;
+    FireProjectile();
   }
 });
-function HandleKeyPress() {
-  if (keys.isWPressed) {
-    player.velocity.vx = Math.cos(player.rotation) * player.speedModifier;
-    player.velocity.vy = Math.sin(player.rotation) * player.speedModifier;
-  } else if (!keys.isWPressed) {
-    player.velocity.vx *= player.friction;
-    player.velocity.vy *= player.friction;
-  }
-  //   if (keys.isSPressed) {
-  //     player.velocity.vx = -Math.cos(player.rotation) * player.speedModifier;
-  //     player.velocity.vy = -Math.sin(player.rotation) * player.speedModifier;
-  //   }
-  if (keys.isAPressed) {
-    player.rotation -= player.rotationSpeed;
-  }
-  if (keys.isDPressed) {
-    player.rotation += player.rotationSpeed;
-  }
+function startInterval() {
+  intervalId = setInterval(() => {
+    let newAsteroid = GenerateRandomAsteroid();
+    asteroids.push(newAsteroid);
+  }, 500);
+}
+function startGame() {
+  GenerateBackgroundStars(1000, 0.5);
+  startInterval();
+  animate();
+}
+function pauseGame() {
+
 }
